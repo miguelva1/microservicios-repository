@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JwtAuthenticationFilter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-productos</a> &gt; <a href="index.source.html" class="el_package">com.example.msproductos.config</a> &gt; <span class="el_source">JwtAuthenticationFilter.java</span></div><h1>JwtAuthenticationFilter.java</h1><pre class="source lang-java linenums">package com.example.msproductos.config;
+
+import com.example.msproductos.client.AuthClient;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
+
+// Filtro de autenticación JWT
+// Intercepta todas las peticiones para validar el token JWT
+@Component
+<span class="fc" id="L22">@RequiredArgsConstructor</span>
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+    private final AuthClient authClient;
+
+    // Procesa cada petición HTTP para validar el token JWT
+    // @param request Petición HTTP entrante
+    // @param response Respuesta HTTP
+    // @param filterChain Cadena de filtros
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        try {
+<span class="fc" id="L35">            String token = getJwtFromRequest(request);</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">            if (token != null) {</span>
+<span class="nc" id="L37">                var authResponse = authClient.validateToken(&quot;Bearer &quot; + token);</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">                if (authResponse.getStatusCode().is2xxSuccessful()) {</span>
+<span class="nc" id="L39">                    var responseBody = authResponse.getBody();</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">                    if (responseBody instanceof Map) {</span>
+<span class="nc" id="L41">                        Map&lt;String, Object&gt; userDetails = (Map&lt;String, Object&gt;) responseBody;</span>
+<span class="nc" id="L42">                        String username = (String) userDetails.get(&quot;username&quot;);</span>
+<span class="nc" id="L43">                        String role = (String) userDetails.get(&quot;roles&quot;);</span>
+                        
+<span class="nc" id="L45">                        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(</span>
+<span class="nc" id="L46">                                username, null, Collections.singletonList(new SimpleGrantedAuthority(role)));</span>
+<span class="nc" id="L47">                        SecurityContextHolder.getContext().setAuthentication(authentication);</span>
+                    }
+                }
+            }
+<span class="nc" id="L51">        } catch (Exception ex) {</span>
+<span class="nc" id="L52">            logger.error(&quot;Could not set user authentication in security context&quot;, ex);</span>
+<span class="fc" id="L53">        }</span>
+
+<span class="fc" id="L55">        filterChain.doFilter(request, response);</span>
+<span class="fc" id="L56">    }</span>
+
+    // Extrae el token JWT del encabezado Authorization
+    // @param request Petición HTTP
+    // @return Token JWT o null si no se encuentra
+    private String getJwtFromRequest(HttpServletRequest request) {
+<span class="fc" id="L62">        String bearerToken = request.getHeader(&quot;Authorization&quot;);</span>
+<span class="pc bpc" id="L63" title="3 of 4 branches missed.">        if (bearerToken != null &amp;&amp; bearerToken.startsWith(&quot;Bearer &quot;)) {</span>
+<span class="nc" id="L64">            return bearerToken.substring(7);</span>
+        }
+<span class="fc" id="L66">        return null;</span>
+    }
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

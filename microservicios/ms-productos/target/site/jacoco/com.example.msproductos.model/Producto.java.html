@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Producto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-productos</a> &gt; <a href="index.source.html" class="el_package">com.example.msproductos.model</a> &gt; <span class="el_source">Producto.java</span></div><h1>Producto.java</h1><pre class="source lang-java linenums">package com.example.msproductos.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+
+// Entidad que representa un producto en el sistema
+// Almacena la información básica de cada producto
+@Entity
+@Table(name = &quot;productos&quot;)
+<span class="pc bnc" id="L14" title="All 70 branches missed.">@Data</span>
+<span class="fc" id="L15">@NoArgsConstructor</span>
+<span class="fc" id="L16">@AllArgsConstructor</span>
+public class Producto {
+    // ID único del producto
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<span class="fc" id="L21">    private Long id;</span>
+
+    // Nombre del producto
+    @Column(nullable = false)
+<span class="fc" id="L25">    private String nombre;</span>
+
+    // Descripción detallada del producto
+    @Column(length = 1000)
+<span class="fc" id="L29">    private String descripcion;</span>
+
+    // Precio del producto
+    @Column(nullable = false, precision = 10, scale = 2)
+<span class="fc" id="L33">    private BigDecimal precio;</span>
+
+    // Cantidad disponible en inventario
+    @Column(nullable = false)
+<span class="fc" id="L37">    private Integer stock;</span>
+
+    // Categoría del producto
+    @Column(nullable = false)
+<span class="fc" id="L41">    private String categoria;</span>
+
+    // URL de la imagen del producto
+<span class="fc" id="L44">    private String imagenUrl;</span>
+
+    // Indica si el producto está activo
+<span class="fc" id="L47">    @Column(nullable = false)</span>
+<span class="fc" id="L48">    private Boolean activo = true;</span>
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

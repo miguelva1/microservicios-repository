@@ -1,0 +1,32 @@
+# Configuración del servidor
+server:
+  port: 8761  # Puerto estándar para Eureka Server
+
+# Configuración de Spring
+spring:
+  application:
+    name: ms-eurekaserver
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    config:
+      uri: http://localhost:8888
+
+# Configuración de Eureka Server
+eureka:
+  client:
+    register-with-eureka: false  # No se registra a sí mismo
+    fetch-registry: false        # No obtiene el registro de otros servidores
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 0  # No espera a que otros servidores se sincronicen
+    enable-self-preservation: false      # Deshabilita la auto-preservación
+
+# Configuración de logging
+logging:
+  level:
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF
+    org.springframework.cloud: INFO
+    org.springframework.boot: INFO 

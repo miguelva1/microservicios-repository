@@ -1,0 +1,18 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: ms-configserver
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    config:
+      server:
+        git:
+          uri: https://github.com/miguelva1/microservicios-config
+          search-paths: '*'
+          clone-on-start: true
+          default-label: master
+
+

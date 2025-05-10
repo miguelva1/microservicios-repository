@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: ms-productos
+  config:
+    import: optional:configserver:http://localhost:8888
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 0
+
+eureka:
+  client:
+    enabled: false
+
+app:
+  services:
+    auth-url: http://localhost:8080
+  security:
+    jwt:
+      secret: test-secret-key
+      expiration: 86400000
+  productos:
+    stock:
+      minimo: 10
+      maximo: 1000
+    precio:
+      minimo: 0.0
+      maximo: 10000.0
+
+logging:
+  level:
+    root: INFO
+    com.example.msproductos: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: INFO 

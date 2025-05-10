@@ -1,0 +1,13 @@
+com\example\msproductos\service\impl\ProductoServiceImpl.class
+com\example\msproductos\controller\ProductoController.class
+com\example\msproductos\repository\ProductoRepository.class
+com\example\msproductos\exception\GlobalExceptionHandler.class
+com\example\msproductos\config\JwtAuthenticationFilter.class
+com\example\msproductos\exception\ProductoNotFoundException.class
+com\example\msproductos\config\SecurityConfig.class
+com\example\msproductos\dto\ProductoDTO.class
+com\example\msproductos\exception\ErrorResponse.class
+com\example\msproductos\service\ProductoService.class
+com\example\msproductos\client\AuthClient.class
+com\example\msproductos\MsProductosApplication.class
+com\example\msproductos\model\Producto.class

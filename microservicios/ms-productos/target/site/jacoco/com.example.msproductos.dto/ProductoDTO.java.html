@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductoDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-productos</a> &gt; <a href="index.source.html" class="el_package">com.example.msproductos.dto</a> &gt; <span class="el_source">ProductoDTO.java</span></div><h1>ProductoDTO.java</h1><pre class="source lang-java linenums">package com.example.msproductos.dto;
+
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+
+import java.math.BigDecimal;
+
+// DTO para transferir datos de productos
+// Se usa para crear y actualizar productos
+<span class="pc bnc" id="L13" title="All 54 branches missed.">@Data</span>
+public class ProductoDTO {
+    // Nombre del producto (requerido, entre 3 y 100 caracteres)
+    @NotBlank(message = &quot;El nombre es requerido&quot;)
+    @Size(min = 3, max = 100, message = &quot;El nombre debe tener entre 3 y 100 caracteres&quot;)
+<span class="fc" id="L18">    private String nombre;</span>
+
+    // Descripción del producto (máximo 1000 caracteres)
+    @Size(max = 1000, message = &quot;La descripción no puede exceder los 1000 caracteres&quot;)
+<span class="fc" id="L22">    private String descripcion;</span>
+
+    // Precio del producto (requerido, mínimo 0)
+    @NotNull(message = &quot;El precio es requerido&quot;)
+    @Min(value = 0, message = &quot;El precio debe ser mayor o igual a 0&quot;)
+<span class="fc" id="L27">    private BigDecimal precio;</span>
+
+    // Stock disponible (requerido, mínimo 0)
+    @NotNull(message = &quot;El stock es requerido&quot;)
+    @Min(value = 0, message = &quot;El stock debe ser mayor o igual a 0&quot;)
+<span class="fc" id="L32">    private Integer stock;</span>
+
+    // Categoría del producto (requerida)
+    @NotBlank(message = &quot;La categoría es requerida&quot;)
+<span class="fc" id="L36">    private String categoria;</span>
+
+    // URL de la imagen del producto
+<span class="fc" id="L39">    private String imagenUrl;</span>
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
