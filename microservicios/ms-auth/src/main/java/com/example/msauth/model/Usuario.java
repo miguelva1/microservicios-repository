@@ -11,30 +11,18 @@ import lombok.NoArgsConstructor;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Clase que representa a un usuario en el sistema
- * Guarda la info básica del usuario y sus roles
- * 
- * @author NTT DATA
- * @version 1.0
- */
+
 @Entity
 @Table(name = "usuarios")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario {
-    /**
-     * ID único del usuario.
-     */
-    @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Nombre de usuario único para el inicio de sesión.
-     * Debe tener entre 3 y 50 caracteres.
-     */
+
     @NotBlank(message = "El nombre de usuario es requerido")
     @Size(min = 3, max = 50, message = "El nombre de usuario debe tener entre 3 y 50 caracteres")
     @Column(unique = true, nullable = false)
